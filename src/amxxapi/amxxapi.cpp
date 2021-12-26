@@ -18,6 +18,7 @@
 #ifdef HAS_AMXX_LIB
 #include "../cleanup.h"
 #include "../hookchain_manager.h"
+#include <cssdk/public/utils.h>
 #include <mhooks/amxxapi/amxxapi.h>
 #include <cassert>
 
@@ -34,6 +35,7 @@ namespace
     struct PluginsUnloading;
     struct PluginsUnloaded;
     struct Detach;
+    struct ClientAuthorized;
 
     template <typename T, typename Ret = void, typename... Args>
     HookChainManager<AmxxApiMHookChain<Ret(Args...)>>* g_hookchain_manager{};
@@ -60,48 +62,6 @@ namespace
         hookchain_manager->AddHook(hook, callback);
 
         return hook;
-    }
-}
-
-namespace mhooks
-{
-    MHook* MHookAmxxCheckGame(const AmxxCheckGameMCallback callback, const HookChainPriority priority, const bool enable)
-    {
-        assert(!!callback);
-        return CreateHook<CheckGame>(callback, priority, enable);
-    }
-
-    MHook* MHookAmxxAttach(const AmxxAttachMCallback callback, const HookChainPriority priority, const bool enable)
-    {
-        assert(!!callback);
-        return CreateHook<Attach>(callback, priority, enable);
-    }
-
-    MHook* MHookAmxxPluginsLoaded(const AmxxPluginsLoadedMCallback callback,
-                                  const HookChainPriority priority, const bool enable)
-    {
-        assert(!!callback);
-        return CreateHook<PluginsLoaded>(callback, priority, enable);
-    }
-
-    MHook* MHookAmxxPluginsUnloading(const AmxxPluginsUnloadingMCallback callback,
-                                     const HookChainPriority priority, const bool enable)
-    {
-        assert(!!callback);
-        return CreateHook<PluginsUnloading>(callback, priority, enable);
-    }
-
-    MHook* MHookAmxxPluginsUnloaded(const AmxxPluginsUnloadedMCallback callback,
-                                    const HookChainPriority priority, const bool enable)
-    {
-        assert(!!callback);
-        return CreateHook<PluginsUnloaded>(callback, priority, enable);
-    }
-
-    MHook* MHookAmxxDetach(const AmxxDetachMCallback callback, const HookChainPriority priority, const bool enable)
-    {
-        assert(!!callback);
-        return CreateHook<Detach>(callback, priority, enable);
     }
 }
 
@@ -169,4 +129,83 @@ ATTR_MINSIZE void AMXX_DETACH() // NOLINT(bugprone-reserved-identifier)
     DestroyHooks();
 }
 #endif
+
+namespace
+{
+    NOINLINE void OnClientAuthorized(const int index, const char* const auth)
+    {
+        if (auto*& manager = g_hookchain_manager<ClientAuthorized, void, int, const char*>;
+            manager != nullptr && auth != nullptr && IsClient(index)) {
+            manager->StartChain(index, auth);
+        }
+    }
+}
+
+namespace mhooks
+{
+    MHook* MHookAmxxCheckGame(const AmxxCheckGameMCallback callback, const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        return CreateHook<CheckGame>(callback, priority, enable);
+    }
+
+    MHook* MHookAmxxAttach(const AmxxAttachMCallback callback, const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        return CreateHook<Attach>(callback, priority, enable);
+    }
+
+    MHook* MHookAmxxPluginsLoaded(const AmxxPluginsLoadedMCallback callback,
+                                  const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        return CreateHook<PluginsLoaded>(callback, priority, enable);
+    }
+
+    MHook* MHookAmxxPluginsUnloading(const AmxxPluginsUnloadingMCallback callback,
+                                     const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        return CreateHook<PluginsUnloading>(callback, priority, enable);
+    }
+
+    MHook* MHookAmxxPluginsUnloaded(const AmxxPluginsUnloadedMCallback callback,
+                                    const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        return CreateHook<PluginsUnloaded>(callback, priority, enable);
+    }
+
+    MHook* MHookAmxxDetach(const AmxxDetachMCallback callback, const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        return CreateHook<Detach>(callback, priority, enable);
+    }
+
+    MHook* MHookAmxxClientAuthorized(const AmxxClientAuthorizedMCallback callback,
+                                     const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        auto* const hook = CreateHook<ClientAuthorized>(callback, priority, false);
+
+        constexpr static auto on_hook_notify = +[](const MHook* const, const MHookNotice notice) {
+            const auto* const manager = g_hookchain_manager<ClientAuthorized, void, int, const char*>;
+            assert(manager != nullptr);
+
+            if (notice == MHookNotice::Enable) {
+                if (manager->HookChainInstance().EnabledHooksCount() == 1) {
+                    amxx::RegisterAuthFunc(OnClientAuthorized);
+                }
+            }
+            else if (notice == MHookNotice::Disable && manager->HookChainInstance().EnabledHooksCount() == 0) {
+                amxx::UnregisterAuthFunc(OnClientAuthorized);
+            }
+        };
+
+        hook->Subscribe(DELEGATE_ARG<on_hook_notify>);
+        hook->Toggle(enable);
+
+        return hook;
+    }
+}
 #endif

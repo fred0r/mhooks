@@ -52,6 +52,10 @@ using AmxxPluginsUnloadedMCallback = core::Delegate<void(const AmxxPluginsUnload
 using AmxxDetachMChain = mhooks::AmxxApiMHookChain<void()>;
 using AmxxDetachMCallback = core::Delegate<void(const AmxxDetachMChain& chain)>;
 
+// ClientAuthorized
+using AmxxClientAuthorizedMChain = mhooks::AmxxApiMHookChain<void(int, const char*)>;
+using AmxxClientAuthorizedMCallback = core::Delegate<void(const AmxxClientAuthorizedMChain& chain, int index, const char* auth)>;
+
 namespace mhooks
 {
 #ifdef AMXX_CHECK_GAME
@@ -131,5 +135,16 @@ namespace mhooks
         AmxxDetachMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 #endif
+
+    /**
+     * @brief Called when the client gets a valid SteamID.
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookAmxxClientAuthorized(
+        AmxxClientAuthorizedMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
