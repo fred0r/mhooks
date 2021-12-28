@@ -115,7 +115,7 @@ namespace mhooks::detail
 
             if (empty_) {
                 on_empty_();
-            }
+            } // cppcheck-suppress missingReturn
         }
         else {
             auto result = hook_chain_.CallNext(args...);
