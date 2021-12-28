@@ -139,6 +139,21 @@ namespace
             manager->StartChain(index, auth);
         }
     }
+
+    void OnClientAuthorizedHookNotify(const MHook* const, const MHookNotice notice)
+    {
+        const auto* const manager = g_hookchain_manager<ClientAuthorized, void, int, const char*>;
+        assert(manager != nullptr);
+
+        if (notice == MHookNotice::Enable) {
+            if (manager->HookChainInstance().EnabledHooksCount() == 1) {
+                amxx::RegisterAuthFunc(OnClientAuthorized);
+            }
+        }
+        else if (notice == MHookNotice::Disable && manager->HookChainInstance().EnabledHooksCount() == 0) {
+            amxx::UnregisterAuthFunc(OnClientAuthorized);
+        }
+    }
 }
 
 namespace mhooks
@@ -188,21 +203,7 @@ namespace mhooks
         assert(!!callback);
         auto* const hook = CreateHook<ClientAuthorized>(callback, priority, false);
 
-        constexpr static auto on_hook_notify = +[](const MHook* const, const MHookNotice notice) {
-            const auto* const manager = g_hookchain_manager<ClientAuthorized, void, int, const char*>;
-            assert(manager != nullptr);
-
-            if (notice == MHookNotice::Enable) {
-                if (manager->HookChainInstance().EnabledHooksCount() == 1) {
-                    amxx::RegisterAuthFunc(OnClientAuthorized);
-                }
-            }
-            else if (notice == MHookNotice::Disable && manager->HookChainInstance().EnabledHooksCount() == 0) {
-                amxx::UnregisterAuthFunc(OnClientAuthorized);
-            }
-        };
-
-        hook->Subscribe(DELEGATE_ARG<on_hook_notify>);
+        hook->Subscribe(DELEGATE_ARG<OnClientAuthorizedHookNotify>);
         hook->Toggle(enable);
 
         return hook;
