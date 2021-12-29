@@ -43,7 +43,7 @@ namespace mhooks
         /**
          * @brief Constructor.
         */
-        MHook(cssdk::HookChainPriority priority, bool enable) noexcept;
+        MHook(cssdk::HookChainPriority priority, bool enable);
 
         /**
          * @brief Move constructor.

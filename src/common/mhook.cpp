@@ -20,7 +20,7 @@
 
 namespace mhooks
 {
-    MHook::MHook(const cssdk::HookChainPriority priority, const bool enable) noexcept
+    MHook::MHook(const cssdk::HookChainPriority priority, const bool enable)
         : destroy_at_detach_(false), priority_(priority), enabled_(enable)
     {
         DestroyAtDetach(true);
