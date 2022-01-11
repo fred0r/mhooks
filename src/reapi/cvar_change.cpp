@@ -117,7 +117,8 @@ namespace
             RemoveHook(hook);
 
             if (IsAllHooksDestroyed()) {
-                MHook::Destroy(g_cvar_direct_set_hook);
+                delete g_cvar_direct_set_hook;
+                g_cvar_direct_set_hook = nullptr;
 
                 delete g_cvar_change_hooks;
                 g_cvar_change_hooks = nullptr;
@@ -133,6 +134,7 @@ namespace
 
         if (g_cvar_direct_set_hook == nullptr) {
             g_cvar_direct_set_hook = MHookReHldsCvarDirectSet(DELEGATE_ARG<OnCvarDirectSet>, HookChainPriority::Medium);
+            g_cvar_direct_set_hook->DestroyAtDetach(false); // It will be manually destroyed in OnHookNotify
         }
 
         if (g_cvar_change_hooks == nullptr) {
