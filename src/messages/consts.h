@@ -23,11 +23,7 @@ namespace mhooks::detail
 {
     constexpr auto MAX_MESSAGES = 255;
 
-#ifndef MSVC_COMPILER
-    [[gnu::const]]
-#endif
-    inline bool
-    IsValidMessageId(const int id) noexcept
+    ATTR_CONST inline bool IsValidMessageId(const int id) noexcept
     {
         return id > 0 && id < MAX_MESSAGES;
     }
