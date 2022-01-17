@@ -90,6 +90,12 @@ using GameDllAddToFullPackMCallback = core::Delegate<cssdk::qboolean(const GameD
 using GameDllClientPutInServerMChain = mhooks::MetamodMHookChain<void(cssdk::Edict*)>;
 using GameDllClientPutInServerMCallback = core::Delegate<void(const GameDllClientPutInServerMChain& chain, cssdk::Edict* client)>;
 
+// UpdateClientData
+using GameDllUpdateClientDataMChain = mhooks::MetamodMHookChain<void(const cssdk::Edict*, cssdk::qboolean, cssdk::ClientData*)>;
+using GameDllUpdateClientDataMCallback = core::Delegate<void(const GameDllUpdateClientDataMChain& chain,
+                                                             const cssdk::Edict* client, cssdk::qboolean send_weapons,
+                                                             cssdk::ClientData* data)>;
+
 namespace mhooks
 {
     /**
@@ -260,6 +266,18 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookGameDllClientPutInServer(
         GameDllClientPutInServerMCallback callback, bool post,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief Updates the given client's data.
+     *
+     * @param callback Hook callback function.
+     * @param post Is this a post hook?
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookGameDllUpdateClientData(
+        GameDllUpdateClientDataMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
