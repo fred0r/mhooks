@@ -128,5 +128,13 @@ namespace mhooks
         struct GameDllAddToFullPack;
         return CreateHook<GameDllAddToFullPack>(HookAddToFullPack, callback, priority, post, enable);
     }
+
+    MHook* MHookGameDllClientPutInServer(const GameDllClientPutInServerMCallback callback, const bool post,
+                                         const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct GameDllClientPutInServer;
+        return CreateHook<GameDllClientPutInServer>(HookClientPutInServer, callback, priority, post, enable);
+    }
 }
 #endif

@@ -86,6 +86,9 @@ using GameDllAddToFullPackMCallback = core::Delegate<cssdk::qboolean(const GameD
                                                                      cssdk::Edict* entity, cssdk::Edict* host,
                                                                      int host_flags, cssdk::qboolean player,
                                                                      unsigned char* set)>;
+// ClientPutInServer
+using GameDllClientPutInServerMChain = mhooks::MetamodMHookChain<void(cssdk::Edict*)>;
+using GameDllClientPutInServerMCallback = core::Delegate<void(const GameDllClientPutInServerMChain& chain, cssdk::Edict* client)>;
 
 namespace mhooks
 {
@@ -244,6 +247,19 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookGameDllAddToFullPack(
         GameDllAddToFullPackMCallback callback, bool post,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief Called by the engine when the client has finished connecting.
+     * This is where the player should be spawned and put into the world, or given a spectator position to view from.
+     *
+     * @param callback Hook callback function.
+     * @param post Is this a post hook?
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookGameDllClientPutInServer(
+        GameDllClientPutInServerMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
