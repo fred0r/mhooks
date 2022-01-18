@@ -139,6 +139,13 @@ using ReGamePlayerBlindMCallback =
     core::Delegate<void(const ReGamePlayerBlindMChain& chain, cssdk::PlayerBase* victim, cssdk::EntityVars* inflictor,
                         cssdk::EntityVars* attacker, float fade_time, float fade_hold, int alpha, cssdk::Vector& color)>;
 
+// PlayerMakeBomber
+using ReGamePlayerMakeBomberMChain =
+    mhooks::ReApiMHookChain<cssdk::ReHookPlayerMakeBomber, bool(cssdk::PlayerBase*)>;
+
+using ReGamePlayerMakeBomberMCallback =
+    core::Delegate<bool(const ReGamePlayerMakeBomberMChain& chain, cssdk::PlayerBase* player)>;
+
 namespace mhooks
 {
     /**
@@ -315,6 +322,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReGamePlayerBlind(
         ReGamePlayerBlindMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReGamePlayerMakeBomber(
+        ReGamePlayerMakeBomberMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
