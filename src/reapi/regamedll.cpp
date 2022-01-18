@@ -154,5 +154,12 @@ namespace mhooks
         struct ReGameCanPlayerHearPlayer;
         return CreateHook<ReGameCanPlayerHearPlayer>(HookChains()->GameRulesCanPlayerHearPlayer(), callback, priority, enable);
     }
+
+    MHook* MHookReGameRulesRoundFreezeEnd(const ReGameRulesRoundFreezeEndMCallback callback,
+                                          const HookChainPriority priority, const bool enable)
+    {
+        struct ReGameRulesRoundFreezeEnd;
+        return CreateHook<ReGameRulesRoundFreezeEnd>(HookChains()->GameRulesOnRoundFreezeEnd(), callback, priority, enable);
+    }
 }
 #endif

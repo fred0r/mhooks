@@ -154,6 +154,10 @@ using ReGameCanPlayerHearPlayerMCallback =
     core::Delegate<bool(const ReGameCanPlayerHearPlayerMChain& chain,
                         cssdk::PlayerBase* listener, cssdk::PlayerBase* talker)>;
 
+// RoundFreezeEnd
+using ReGameRulesRoundFreezeEndMChain = mhooks::ReApiMHookChain<cssdk::ReHookGameRulesOnRoundFreezeEnd, void()>;
+using ReGameRulesRoundFreezeEndMCallback = core::Delegate<void(const ReGameRulesRoundFreezeEndMChain& chain)>;
+
 namespace mhooks
 {
     /**
@@ -352,6 +356,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReGameCanPlayerHearPlayer(
         ReGameCanPlayerHearPlayerMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReGameRulesRoundFreezeEnd(
+        ReGameRulesRoundFreezeEndMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
