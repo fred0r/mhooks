@@ -175,5 +175,12 @@ namespace mhooks
         struct ReGameRulesRestartRound;
         return CreateHook<ReGameRulesRestartRound>(HookChains()->GameRulesRestartRound(), callback, priority, enable);
     }
+
+    MHook* MHookReGameResetMaxSpeed(const ReGameResetMaxSpeedMCallback callback,
+                                    const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerResetMaxSpeed;
+        return CreateHook<ReGamePlayerResetMaxSpeed>(HookChains()->PlayerResetMaxSpeed(), callback, priority, enable);
+    }
 }
 #endif
