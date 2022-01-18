@@ -146,6 +146,15 @@ using ReHldsGetEntityInitMChain =
 using ReHldsGetEntityInitMCallback =
     core::Delegate<cssdk::EntityInitFunction(const ReHldsGetEntityInitMChain& chain, const char* classname)>;
 
+// SV_CreatePacketEntities
+using ReHldsCreatePacketEntitiesMChain =
+    mhooks::ReApiMHookChain<cssdk::ReHookSvCreatePacketEntities,
+                            int(cssdk::SvDelta, cssdk::IGameClient*, cssdk::PacketEntities*, cssdk::SizeBuf*)>;
+
+using ReHldsCreatePacketEntitiesMCallback =
+    core::Delegate<int(const ReHldsCreatePacketEntitiesMChain& chain, cssdk::SvDelta type,
+                       cssdk::IGameClient* client, cssdk::PacketEntities* to, cssdk::SizeBuf* message)>;
+
 namespace mhooks
 {
     /**
@@ -333,6 +342,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReHldsGetEntityInit(
         ReHldsGetEntityInitMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReHldsCreatePacketEntities(
+        ReHldsCreatePacketEntitiesMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif

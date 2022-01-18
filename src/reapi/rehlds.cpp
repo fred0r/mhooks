@@ -147,5 +147,12 @@ namespace mhooks
         struct ReHldsGetEntityInit;
         return CreateHook<ReHldsGetEntityInit>(HookChains()->GetEntityInit(), callback, priority, enable);
     }
+
+    MHook* MHookReHldsCreatePacketEntities(const ReHldsCreatePacketEntitiesMCallback callback,
+                                           const HookChainPriority priority, const bool enable)
+    {
+        struct ReHldsCreatePacketEntities;
+        return CreateHook<ReHldsCreatePacketEntities>(HookChains()->SvCreatePacketEntities(), callback, priority, enable);
+    }
 }
 #endif
