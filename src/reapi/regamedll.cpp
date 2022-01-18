@@ -133,5 +133,12 @@ namespace mhooks
         struct ReGameGetForceCamera;
         return CreateHook<ReGameGetForceCamera>(HookChains()->GetForceCamera(), callback, priority, enable);
     }
+
+    MHook* MHookReGamePlayerBlind(const ReGamePlayerBlindMCallback callback,
+                                  const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerBlind;
+        return CreateHook<ReGamePlayerBlind>(HookChains()->PlayerBlind(), callback, priority, enable);
+    }
 }
 #endif
