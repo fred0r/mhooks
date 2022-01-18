@@ -93,6 +93,14 @@ using EngineTraceLineMCallback = core::Delegate<void(const EngineTraceLineMChain
                                                      const cssdk::Vector& end_pos, int trace_ignore_flags,
                                                      cssdk::Edict* entity_to_ignore, cssdk::TraceResult* result)>;
 
+// TraceHull
+using EngineTraceHullMChain = mhooks::MetamodMHookChain<void(const cssdk::Vector&, const cssdk::Vector&,
+                                                             int, int, cssdk::Edict*, cssdk::TraceResult*)>;
+
+using EngineTraceHullMCallback = core::Delegate<void(const EngineTraceHullMChain& chain, const cssdk::Vector& start_pos,
+                                                     const cssdk::Vector& end_pos, int trace_ignore_flags, int hull_number,
+                                                     cssdk::Edict* entity_to_ignore, cssdk::TraceResult* result)>;
+
 namespace mhooks
 {
     /**
@@ -285,6 +293,18 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookEngineTraceLine(
         EngineTraceLineMCallback callback, bool post,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief Performs a trace between a starting and ending position, using the specified hull.
+     *
+     * @param callback Hook callback function.
+     * @param post Is this a post hook?
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookEngineTraceHull(
+        EngineTraceHullMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif

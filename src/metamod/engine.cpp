@@ -152,5 +152,13 @@ namespace mhooks
         struct EngineTraceLine;
         return CreateHook<EngineTraceLine>(HookTraceLine, callback, priority, post, enable);
     }
+
+    MHook* MHookEngineTraceHull(const EngineTraceHullMCallback callback, const bool post,
+                                const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct EngineTraceHull;
+        return CreateHook<EngineTraceHull>(HookTraceHull, callback, priority, post, enable);
+    }
 }
 #endif
