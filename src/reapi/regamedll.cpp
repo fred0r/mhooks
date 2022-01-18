@@ -147,5 +147,12 @@ namespace mhooks
         struct ReGamePlayerMakeBomber;
         return CreateHook<ReGamePlayerMakeBomber>(HookChains()->PlayerMakeBomber(), callback, priority, enable);
     }
+
+    MHook* MHookReGameCanPlayerHearPlayer(const ReGameCanPlayerHearPlayerMCallback callback,
+                                          const HookChainPriority priority, const bool enable)
+    {
+        struct ReGameCanPlayerHearPlayer;
+        return CreateHook<ReGameCanPlayerHearPlayer>(HookChains()->GameRulesCanPlayerHearPlayer(), callback, priority, enable);
+    }
 }
 #endif
