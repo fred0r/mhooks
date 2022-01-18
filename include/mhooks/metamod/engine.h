@@ -76,6 +76,10 @@ using EnginePrecacheModelMCallback = core::Delegate<int(const EnginePrecacheMode
 using EnginePrecacheSoundMChain = mhooks::MetamodMHookChain<int(const char*)>;
 using EnginePrecacheSoundMCallback = core::Delegate<int(const EnginePrecacheSoundMChain& chain, const char* path)>;
 
+// PrecacheGeneric
+using EnginePrecacheGenericMChain = mhooks::MetamodMHookChain<int(const char*)>;
+using EnginePrecacheGenericMCallback = core::Delegate<int(const EnginePrecacheGenericMChain& chain, const char* path)>;
+
 namespace mhooks
 {
     /**
@@ -232,6 +236,18 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookEnginePrecacheSound(
         EnginePrecacheSoundMCallback callback, bool post,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief Precaches a file.
+     *
+     * @param callback Hook callback function.
+     * @param post Is this a post hook?
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookEnginePrecacheGeneric(
+        EnginePrecacheGenericMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif

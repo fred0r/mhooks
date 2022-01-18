@@ -128,5 +128,13 @@ namespace mhooks
         struct EnginePrecacheSound;
         return CreateHook<EnginePrecacheSound>(HookPrecacheSound, callback, priority, post, enable);
     }
+
+    MHook* MHookEnginePrecacheGeneric(const EnginePrecacheGenericMCallback callback, const bool post,
+                                      const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct EnginePrecacheGeneric;
+        return CreateHook<EnginePrecacheGeneric>(HookPrecacheGeneric, callback, priority, post, enable);
+    }
 }
 #endif
