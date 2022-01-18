@@ -158,6 +158,14 @@ using ReGameCanPlayerHearPlayerMCallback =
 using ReGameRulesRoundFreezeEndMChain = mhooks::ReApiMHookChain<cssdk::ReHookGameRulesOnRoundFreezeEnd, void()>;
 using ReGameRulesRoundFreezeEndMCallback = core::Delegate<void(const ReGameRulesRoundFreezeEndMChain& chain)>;
 
+// RoundEnd
+using ReGameRulesRoundEndMChain =
+    mhooks::ReApiMHookChain<cssdk::ReHookRoundEnd, bool(int, cssdk::ScenarioEventEndRound, float)>;
+
+using ReGameRulesRoundEndMCallback =
+    core::Delegate<bool(const ReGameRulesRoundEndMChain& chain, int win_status,
+                        cssdk::ScenarioEventEndRound event, float delay)>;
+
 namespace mhooks
 {
     /**
@@ -367,6 +375,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReGameRulesRoundFreezeEnd(
         ReGameRulesRoundFreezeEndMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReGameRulesRoundEnd(
+        ReGameRulesRoundEndMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
