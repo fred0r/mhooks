@@ -144,5 +144,13 @@ namespace mhooks
         struct EnginePrecacheEvent;
         return CreateHook<EnginePrecacheEvent>(HookPrecacheEvent, callback, priority, post, enable);
     }
+
+    MHook* MHookEngineTraceLine(const EngineTraceLineMCallback callback, const bool post,
+                                const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct EngineTraceLine;
+        return CreateHook<EngineTraceLine>(HookTraceLine, callback, priority, post, enable);
+    }
 }
 #endif
