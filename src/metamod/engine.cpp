@@ -136,5 +136,13 @@ namespace mhooks
         struct EnginePrecacheGeneric;
         return CreateHook<EnginePrecacheGeneric>(HookPrecacheGeneric, callback, priority, post, enable);
     }
+
+    MHook* MHookEnginePrecacheEvent(const EnginePrecacheEventMCallback callback, const bool post,
+                                    const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct EnginePrecacheEvent;
+        return CreateHook<EnginePrecacheEvent>(HookPrecacheEvent, callback, priority, post, enable);
+    }
 }
 #endif
