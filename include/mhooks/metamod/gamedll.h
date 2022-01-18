@@ -33,8 +33,7 @@ using GameDllDispatchSpawnMCallback = core::Delegate<int(const GameDllDispatchSp
 
 // ServerActivate
 using GameDllServerActivateMChain = mhooks::MetamodMHookChain<void(cssdk::Edict*, int, int)>;
-using GameDllServerActivateMCallback = core::Delegate<void(const GameDllServerActivateMChain& chain,
-                                                           cssdk::Edict* edict_list, int edict_count, int client_max)>;
+using GameDllServerActivateMCallback = core::Delegate<void(const GameDllServerActivateMChain& chain, cssdk::Edict* edict_list, int edict_count, int client_max)>;
 
 // ServerDeactivate
 using GameDllServerDeactivateMChain = mhooks::MetamodMHookChain<void()>;
@@ -42,14 +41,11 @@ using GameDllServerDeactivateMCallback = core::Delegate<void(const GameDllServer
 
 // ClientConnect
 using GameDllClientConnectMChain = mhooks::MetamodMHookChain<cssdk::qboolean(cssdk::Edict*, const char*, const char*, char*)>;
-using GameDllClientConnectMCallback = core::Delegate<cssdk::qboolean(const GameDllClientConnectMChain& chain,
-                                                                     cssdk::Edict* client, const char* name,
-                                                                     const char* address, char* reject_reason)>;
+using GameDllClientConnectMCallback = core::Delegate<cssdk::qboolean(const GameDllClientConnectMChain& chain, cssdk::Edict* client, const char* name, const char* address, char* reject_reason)>;
 
 // ClientUserInfoChanged
 using GameDllClientUserInfoChangedMChain = mhooks::MetamodMHookChain<void(cssdk::Edict*, char*)>;
-using GameDllClientUserInfoChangedMCallback = core::Delegate<void(const GameDllClientUserInfoChangedMChain& chain,
-                                                                  cssdk::Edict* client, char* info_buffer)>;
+using GameDllClientUserInfoChangedMCallback = core::Delegate<void(const GameDllClientUserInfoChangedMChain& chain, cssdk::Edict* client, char* info_buffer)>;
 
 // ClientCommand
 using GameDllClientCommandMChain = mhooks::MetamodMHookChain<void(cssdk::Edict*)>;
@@ -61,8 +57,7 @@ using GameDllStartFrameMCallback = core::Delegate<void(const GameDllStartFrameMC
 
 // CmdStart
 using GameDllCmdStartMChain = mhooks::MetamodMHookChain<void(const cssdk::Edict*, const cssdk::UserCmd*, unsigned int)>;
-using GameDllCmdStartMCallback = core::Delegate<void(const GameDllCmdStartMChain& chain, const cssdk::Edict* client,
-                                                     const cssdk::UserCmd* cmd, unsigned int random_seed)>;
+using GameDllCmdStartMCallback = core::Delegate<void(const GameDllCmdStartMChain& chain, const cssdk::Edict* client, const cssdk::UserCmd* cmd, unsigned int random_seed)>;
 
 // CmdEnd
 using GameDllCmdEndMChain = mhooks::MetamodMHookChain<void(const cssdk::Edict*)>;
@@ -77,24 +72,16 @@ using GameDllPlayerPostThinkMChain = mhooks::MetamodMHookChain<void(cssdk::Edict
 using GameDllPlayerPostThinkMCallback = core::Delegate<void(const GameDllPlayerPostThinkMChain& chain, cssdk::Edict* client)>;
 
 // AddToFullPack
-using GameDllAddToFullPackMChain = mhooks::MetamodMHookChain<cssdk::qboolean(cssdk::EntityState*, int, cssdk::Edict*,
-                                                                             cssdk::Edict*, int, cssdk::qboolean,
-                                                                             unsigned char*)>;
+using GameDllAddToFullPackMChain = mhooks::MetamodMHookChain<cssdk::qboolean(cssdk::EntityState*, int, cssdk::Edict*, cssdk::Edict*, int, cssdk::qboolean, unsigned char*)>;
+using GameDllAddToFullPackMCallback = core::Delegate<cssdk::qboolean(const GameDllAddToFullPackMChain& chain, cssdk::EntityState* state, int entity_index, cssdk::Edict* entity, cssdk::Edict* host, int host_flags, cssdk::qboolean player, unsigned char* set)>;
 
-using GameDllAddToFullPackMCallback = core::Delegate<cssdk::qboolean(const GameDllAddToFullPackMChain& chain,
-                                                                     cssdk::EntityState* state, int entity_index,
-                                                                     cssdk::Edict* entity, cssdk::Edict* host,
-                                                                     int host_flags, cssdk::qboolean player,
-                                                                     unsigned char* set)>;
 // ClientPutInServer
 using GameDllClientPutInServerMChain = mhooks::MetamodMHookChain<void(cssdk::Edict*)>;
 using GameDllClientPutInServerMCallback = core::Delegate<void(const GameDllClientPutInServerMChain& chain, cssdk::Edict* client)>;
 
 // UpdateClientData
 using GameDllUpdateClientDataMChain = mhooks::MetamodMHookChain<void(const cssdk::Edict*, cssdk::qboolean, cssdk::ClientData*)>;
-using GameDllUpdateClientDataMCallback = core::Delegate<void(const GameDllUpdateClientDataMChain& chain,
-                                                             const cssdk::Edict* client, cssdk::qboolean send_weapons,
-                                                             cssdk::ClientData* data)>;
+using GameDllUpdateClientDataMCallback = core::Delegate<void(const GameDllUpdateClientDataMChain& chain, const cssdk::Edict* client, cssdk::qboolean send_weapons, cssdk::ClientData* data)>;
 
 namespace mhooks
 {

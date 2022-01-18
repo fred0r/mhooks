@@ -18,6 +18,7 @@
 #if defined(HAS_CSSDK_LIB) && defined(HAS_CORE_LIB)
 #include <mhooks/reapi/cvar_change.h>
 #include <algorithm>
+#include <cassert>
 #include <vector>
 
 using namespace std;

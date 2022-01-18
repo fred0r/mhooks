@@ -27,13 +27,11 @@
 
 // Message
 using NetworkMessageMChain = mhooks::MessageMHookChain;
-using NetworkMessageMCallback = core::Delegate<bool(const NetworkMessageMChain& chain, cssdk::MessageType& type, int id,
-                                                    float*& origin, cssdk::Edict*& client, mhooks::MessageArgs& args)>;
+using NetworkMessageMCallback = core::Delegate<bool(const NetworkMessageMChain& chain, cssdk::MessageType& type, int id, float*& origin, cssdk::Edict*& client, mhooks::MessageArgs& args)>;
 
 // GameEvent
 using GameEventMChain = NetworkMessageMChain;
-using GameEventMCallback = core::Delegate<void(cssdk::MessageType type, int id, const float* origin,
-                                               const cssdk::Edict* client, const mhooks::MessageArgs& args)>;
+using GameEventMCallback = core::Delegate<void(cssdk::MessageType type, int id, const float* origin, const cssdk::Edict* client, const mhooks::MessageArgs& args)>;
 
 namespace mhooks
 {

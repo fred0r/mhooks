@@ -18,6 +18,7 @@
 #if defined(HAS_CSSDK_LIB) && defined(HAS_CORE_LIB)
 #include "createhook.h"
 #include <mhooks/reapi/regamedll.h>
+#include <cassert>
 
 using namespace core;
 using namespace cssdk;
@@ -29,6 +30,7 @@ namespace mhooks
     MHook* MHookReGameShowMenu(const ReGameShowMenuMCallback callback,
                                const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameShowMenu;
         return CreateHook<ReGameShowMenu>(HookChains()->ShowMenu(), callback, priority, enable);
     }
@@ -36,6 +38,7 @@ namespace mhooks
     MHook* MHookReGameShowVguiMenu(const ReGameShowVguiMenuMCallback callback,
                                    const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameShowVguiMenu;
         return CreateHook<ReGameShowVguiMenu>(HookChains()->ShowVguiMenu(), callback, priority, enable);
     }
@@ -43,6 +46,7 @@ namespace mhooks
     MHook* MHookReGameHandleMenuChooseTeam(const ReGameHandleMenuChooseTeamMCallback callback,
                                            const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameHandleMenuChooseTeam;
         return CreateHook<ReGameHandleMenuChooseTeam>(HookChains()->HandleMenuChooseTeam(), callback, priority, enable);
     }
@@ -50,6 +54,7 @@ namespace mhooks
     MHook* MHookReGameHandleMenuChooseAppearance(const ReGameHandleMenuChooseAppearanceMCallback callback,
                                                  const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameHandleMenuChooseAppearance;
         return CreateHook<ReGameHandleMenuChooseAppearance>(HookChains()->HandleMenuChooseAppearance(),
                                                             callback, priority, enable);
@@ -58,6 +63,7 @@ namespace mhooks
     MHook* MHookReGameGetForceCamera(const ReGameGetForceCameraMCallback callback,
                                      const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameGetForceCamera;
         return CreateHook<ReGameGetForceCamera>(HookChains()->GetForceCamera(), callback, priority, enable);
     }
@@ -65,6 +71,7 @@ namespace mhooks
     MHook* MHookReGamePlayerBlind(const ReGamePlayerBlindMCallback callback,
                                   const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerBlind;
         return CreateHook<ReGamePlayerBlind>(HookChains()->PlayerBlind(), callback, priority, enable);
     }
@@ -72,6 +79,7 @@ namespace mhooks
     MHook* MHookReGameRadiusFlashTraceLine(const ReGameRadiusFlashTraceLineMCallback callback,
                                            const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameRadiusFlashTraceLine;
         return CreateHook<ReGameRadiusFlashTraceLine>(HookChains()->RadiusFlashTraceLine(), callback, priority, enable);
     }
@@ -79,6 +87,7 @@ namespace mhooks
     MHook* MHookReGameRulesInstallGameRules(const ReGameRulesInstallGameRulesMCallback callback,
                                             const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameRulesInstallGameRules;
         return CreateHook<ReGameRulesInstallGameRules>(HookChains()->InstallGameRules(), callback, priority, enable);
     }
@@ -86,6 +95,7 @@ namespace mhooks
     MHook* MHookReGameRulesRoundFreezeEnd(const ReGameRulesRoundFreezeEndMCallback callback,
                                           const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameRulesRoundFreezeEnd;
         return CreateHook<ReGameRulesRoundFreezeEnd>(HookChains()->GameRulesOnRoundFreezeEnd(), callback, priority, enable);
     }
@@ -93,6 +103,7 @@ namespace mhooks
     MHook* MHookReGameRulesRoundEnd(const ReGameRulesRoundEndMCallback callback,
                                     const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameRulesRoundEnd;
         return CreateHook<ReGameRulesRoundEnd>(HookChains()->RoundEnd(), callback, priority, enable);
     }
@@ -100,6 +111,7 @@ namespace mhooks
     MHook* MHookReGameMultiplayRestartRound(const ReGameMultiplayRestartRoundMCallback callback,
                                             const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameMultiplayRestartRound;
         return CreateHook<ReGameMultiplayRestartRound>(HookChains()->GameRulesRestartRound(), callback, priority, enable);
     }
@@ -107,6 +119,7 @@ namespace mhooks
     MHook* MHookReGameMultiplayBalanceTeams(const ReGameMultiplayBalanceTeamsMCallback callback,
                                             const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameMultiplayBalanceTeams;
         return CreateHook<ReGameMultiplayBalanceTeams>(HookChains()->GameRulesBalanceTeams(), callback, priority, enable);
     }
@@ -114,6 +127,7 @@ namespace mhooks
     MHook* MHookReGameMgrHelpCanPlayerHearPlayer(const ReGameMgrHelpCanPlayerHearPlayerMCallback callback,
                                                  const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameMgrHelpCanPlayerHearPlayer;
         return CreateHook<ReGameMgrHelpCanPlayerHearPlayer>(HookChains()->GameRulesCanPlayerHearPlayer(), callback, priority, enable);
     }
@@ -121,6 +135,7 @@ namespace mhooks
     MHook* MHookReGameWeaponDefaultDeploy(const ReGameWeaponDefaultDeployMCallback callback,
                                           const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGameWeaponDefaultDeploy;
         return CreateHook<ReGameWeaponDefaultDeploy>(HookChains()->PlayerBaseWeaponDefaultDeploy(), callback, priority, enable);
     }
@@ -128,6 +143,7 @@ namespace mhooks
     MHook* MHookReGamePlayerSpawn(const ReGamePlayerSpawnMCallback callback,
                                   const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerSpawn;
         return CreateHook<ReGamePlayerSpawn>(HookChains()->PlayerSpawn(), callback, priority, enable);
     }
@@ -135,6 +151,7 @@ namespace mhooks
     MHook* MHookReGamePlayerPreThink(const ReGamePlayerPreThinkMCallback callback,
                                      const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerPreThink;
         return CreateHook<ReGamePlayerPreThink>(HookChains()->PlayerPreThink(), callback, priority, enable);
     }
@@ -142,6 +159,7 @@ namespace mhooks
     MHook* MHookReGamePlayerPostThink(const ReGamePlayerPostThinkMCallback callback,
                                       const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerPostThink;
         return CreateHook<ReGamePlayerPostThink>(HookChains()->PlayerPostThink(), callback, priority, enable);
     }
@@ -149,6 +167,7 @@ namespace mhooks
     MHook* MHookReGamePlayerUpdateClientData(const ReGamePlayerUpdateClientDataMCallback callback,
                                              const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerUpdateClientData;
         return CreateHook<ReGamePlayerUpdateClientData>(HookChains()->PlayerUpdateClientData(),
                                                         callback, priority, enable);
@@ -157,6 +176,7 @@ namespace mhooks
     MHook* MHookReGamePlayerTakeDamage(const ReGamePlayerTakeDamageMCallback callback,
                                        const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerTakeDamage;
         return CreateHook<ReGamePlayerTakeDamage>(HookChains()->PlayerTakeDamage(), callback, priority, enable);
     }
@@ -164,6 +184,7 @@ namespace mhooks
     MHook* MHookReGamePlayerKilled(const ReGamePlayerKilledMCallback callback,
                                    const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerKilled;
         return CreateHook<ReGamePlayerKilled>(HookChains()->PlayerKilled(), callback, priority, enable);
     }
@@ -171,6 +192,7 @@ namespace mhooks
     MHook* MHookReGamePlayerObserverIsValidTarget(const ReGamePlayerObserverIsValidTargetMCallback callback,
                                                   const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerObserverIsValidTarget;
         return CreateHook<ReGamePlayerObserverIsValidTarget>(HookChains()->PlayerObserverIsValidTarget(),
                                                              callback, priority, enable);
@@ -179,6 +201,7 @@ namespace mhooks
     MHook* MHookReGamePlayerStartObserver(const ReGamePlayerStartObserverMCallback callback,
                                           const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerStartObserver;
         return CreateHook<ReGamePlayerStartObserver>(HookChains()->PlayerStartObserver(), callback, priority, enable);
     }
@@ -186,6 +209,7 @@ namespace mhooks
     MHook* MHookReGamePlayerGetIntoGame(const ReGamePlayerGetIntoGameMCallback callback,
                                         const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerGetIntoGame;
         return CreateHook<ReGamePlayerGetIntoGame>(HookChains()->PlayerGetIntoGame(), callback, priority, enable);
     }
@@ -193,6 +217,7 @@ namespace mhooks
     MHook* MHookReGamePlayerMakeBomber(const ReGamePlayerMakeBomberMCallback callback,
                                        const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerMakeBomber;
         return CreateHook<ReGamePlayerMakeBomber>(HookChains()->PlayerMakeBomber(), callback, priority, enable);
     }
@@ -200,6 +225,7 @@ namespace mhooks
     MHook* MHookReGamePlayerResetMaxSpeed(const ReGamePlayerResetMaxSpeedMCallback callback,
                                           const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerResetMaxSpeed;
         return CreateHook<ReGamePlayerResetMaxSpeed>(HookChains()->PlayerResetMaxSpeed(), callback, priority, enable);
     }
@@ -207,6 +233,7 @@ namespace mhooks
     MHook* MHookReGamePlayerSpawnEquip(const ReGamePlayerSpawnEquipMCallback callback,
                                        const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerSpawnEquip;
         return CreateHook<ReGamePlayerSpawnEquip>(HookChains()->PlayerOnSpawnEquip(), callback, priority, enable);
     }
@@ -214,6 +241,7 @@ namespace mhooks
     MHook* MHookReGamePlayerGiveDefaultItems(const ReGamePlayerGiveDefaultItemsMCallback callback,
                                              const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerGiveDefaultItems;
         return CreateHook<ReGamePlayerGiveDefaultItems>(HookChains()->PlayerGiveDefaultItems(), callback, priority, enable);
     }
@@ -221,6 +249,7 @@ namespace mhooks
     MHook* MHookReGamePlayerSetClientUserInfoName(const ReGamePlayerSetClientUserInfoNameMCallback callback,
                                                   const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerSetClientUserInfoName;
         return CreateHook<ReGamePlayerSetClientUserInfoName>(HookChains()->PlayerSetClientUserInfoName(), callback, priority, enable);
     }
@@ -228,6 +257,7 @@ namespace mhooks
     MHook* MHookReGamePlayerSetClientUserInfoModel(const ReGamePlayerSetClientUserInfoModelMCallback callback,
                                                    const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerSetClientUserInfoModel;
         return CreateHook<ReGamePlayerSetClientUserInfoModel>(HookChains()->PlayerSetClientUserInfoModel(), callback, priority, enable);
     }
@@ -235,6 +265,7 @@ namespace mhooks
     MHook* MHookReGamePlayerThrowGrenade(const ReGamePlayerThrowGrenadeMCallback callback,
                                          const HookChainPriority priority, const bool enable)
     {
+        assert(!!callback);
         struct ReGamePlayerThrowGrenade;
         return CreateHook<ReGamePlayerThrowGrenade>(HookChains()->PlayerThrowGrenade(), callback, priority, enable);
     }

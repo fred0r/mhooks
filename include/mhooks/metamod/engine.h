@@ -25,8 +25,7 @@
 
 // MessageBegin
 using EngineMessageBeginMChain = mhooks::MetamodMHookChain<void(cssdk::MessageType, int, const float*, cssdk::Edict*)>;
-using EngineMessageBeginMCallback = core::Delegate<void(const EngineMessageBeginMChain& chain, cssdk::MessageType type,
-                                                        int id, const float* origin, cssdk::Edict* client)>;
+using EngineMessageBeginMCallback = core::Delegate<void(const EngineMessageBeginMChain& chain, cssdk::MessageType type, int id, const float* origin, cssdk::Edict* client)>;
 
 // MessageEnd
 using EngineMessageEndMChain = mhooks::MetamodMHookChain<void()>;
@@ -82,24 +81,15 @@ using EnginePrecacheGenericMCallback = core::Delegate<int(const EnginePrecacheGe
 
 // PrecacheEvent
 using EnginePrecacheEventMChain = mhooks::MetamodMHookChain<unsigned short(int, const char*)>;
-using EnginePrecacheEventMCallback = core::Delegate<unsigned short(const EnginePrecacheEventMChain& chain,
-                                                                   int type, const char* path)>;
+using EnginePrecacheEventMCallback = core::Delegate<unsigned short(const EnginePrecacheEventMChain& chain, int type, const char* path)>;
 
 // TraceLine
-using EngineTraceLineMChain = mhooks::MetamodMHookChain<void(const cssdk::Vector&, const cssdk::Vector&,
-                                                             int, cssdk::Edict*, cssdk::TraceResult*)>;
-
-using EngineTraceLineMCallback = core::Delegate<void(const EngineTraceLineMChain& chain, const cssdk::Vector& start_pos,
-                                                     const cssdk::Vector& end_pos, int trace_ignore_flags,
-                                                     cssdk::Edict* entity_to_ignore, cssdk::TraceResult* result)>;
+using EngineTraceLineMChain = mhooks::MetamodMHookChain<void(const cssdk::Vector&, const cssdk::Vector&, int, cssdk::Edict*, cssdk::TraceResult*)>;
+using EngineTraceLineMCallback = core::Delegate<void(const EngineTraceLineMChain& chain, const cssdk::Vector& start_pos, const cssdk::Vector& end_pos, int trace_ignore_flags, cssdk::Edict* entity_to_ignore, cssdk::TraceResult* result)>;
 
 // TraceHull
-using EngineTraceHullMChain = mhooks::MetamodMHookChain<void(const cssdk::Vector&, const cssdk::Vector&,
-                                                             int, int, cssdk::Edict*, cssdk::TraceResult*)>;
-
-using EngineTraceHullMCallback = core::Delegate<void(const EngineTraceHullMChain& chain, const cssdk::Vector& start_pos,
-                                                     const cssdk::Vector& end_pos, int trace_ignore_flags, int hull_number,
-                                                     cssdk::Edict* entity_to_ignore, cssdk::TraceResult* result)>;
+using EngineTraceHullMChain = mhooks::MetamodMHookChain<void(const cssdk::Vector&, const cssdk::Vector&, int, int, cssdk::Edict*, cssdk::TraceResult*)>;
+using EngineTraceHullMCallback = core::Delegate<void(const EngineTraceHullMChain& chain, const cssdk::Vector& start_pos, const cssdk::Vector& end_pos, int trace_ignore_flags, int hull_number, cssdk::Edict* entity_to_ignore, cssdk::TraceResult* result)>;
 
 namespace mhooks
 {
