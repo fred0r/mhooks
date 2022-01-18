@@ -112,5 +112,13 @@ namespace mhooks
         struct EngineRegUserMessage;
         return CreateHook<EngineRegUserMessage>(HookRegUserMessage, callback, priority, post, enable);
     }
+
+    MHook* MHookEnginePrecacheModel(const EnginePrecacheModelMCallback callback, const bool post,
+                                    const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct EnginePrecacheModel;
+        return CreateHook<EnginePrecacheModel>(HookPrecacheModel, callback, priority, post, enable);
+    }
 }
 #endif

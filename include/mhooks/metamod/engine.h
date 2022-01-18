@@ -68,6 +68,10 @@ using EngineWriteEntityMCallback = core::Delegate<void(const EngineWriteEntityMC
 using EngineRegUserMessageMChain = mhooks::MetamodMHookChain<int(const char*, int)>;
 using EngineRegUserMessageMCallback = core::Delegate<int(const EngineRegUserMessageMChain& chain, const char* name, int size)>;
 
+// PrecacheModel
+using EnginePrecacheModelMChain = mhooks::MetamodMHookChain<int(const char*)>;
+using EnginePrecacheModelMCallback = core::Delegate<int(const EnginePrecacheModelMChain& chain, const char* path)>;
+
 namespace mhooks
 {
     /**
@@ -200,6 +204,18 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookEngineRegUserMessage(
         EngineRegUserMessageMCallback callback, bool post,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief Precaches a model.
+     *
+     * @param callback Hook callback function.
+     * @param post Is this a post hook?
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookEnginePrecacheModel(
+        EnginePrecacheModelMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
