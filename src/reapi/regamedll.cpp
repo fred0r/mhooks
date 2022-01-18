@@ -168,5 +168,12 @@ namespace mhooks
         struct ReGameRulesRoundEnd;
         return CreateHook<ReGameRulesRoundEnd>(HookChains()->RoundEnd(), callback, priority, enable);
     }
+
+    MHook* MHookReGameRestartRound(const ReGameRestartRoundMCallback callback,
+                                   const HookChainPriority priority, const bool enable)
+    {
+        struct ReGameRulesRestartRound;
+        return CreateHook<ReGameRulesRestartRound>(HookChains()->GameRulesRestartRound(), callback, priority, enable);
+    }
 }
 #endif

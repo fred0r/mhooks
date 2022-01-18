@@ -166,6 +166,10 @@ using ReGameRulesRoundEndMCallback =
     core::Delegate<bool(const ReGameRulesRoundEndMChain& chain, int win_status,
                         cssdk::ScenarioEventEndRound event, float delay)>;
 
+// RestartRound
+using ReGameRestartRoundMChain = mhooks::ReApiMHookChain<cssdk::ReHookGameRulesRestartRound, void()>;
+using ReGameRestartRoundMCallback = core::Delegate<void(const ReGameRestartRoundMChain& chain)>;
+
 namespace mhooks
 {
     /**
@@ -386,6 +390,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReGameRulesRoundEnd(
         ReGameRulesRoundEndMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReGameRestartRound(
+        ReGameRestartRoundMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
