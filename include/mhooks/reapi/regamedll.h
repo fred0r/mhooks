@@ -178,6 +178,10 @@ using ReGameResetMaxSpeedMCallback = core::Delegate<void(const ReGameResetMaxSpe
 using ReGamePlayerSpawnEquipMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerOnSpawnEquip, void(cssdk::PlayerBase*, bool, bool)>;
 using ReGamePlayerSpawnEquipMCallback = core::Delegate<void(const ReGamePlayerSpawnEquipMChain& chain, cssdk::PlayerBase* player, bool add_default, bool equip_game)>;
 
+// CBasePlayer::GiveDefaultItems
+using ReGamePlayerGiveDefaultItemsMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerGiveDefaultItems, void(cssdk::PlayerBase*)>;
+using ReGamePlayerGiveDefaultItemsMCallback = core::Delegate<void(const ReGamePlayerGiveDefaultItemsMChain& chain, cssdk::PlayerBase* player)>;
+
 namespace mhooks
 {
     /**
@@ -431,6 +435,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReGamePlayerSpawnEquip(
         ReGamePlayerSpawnEquipMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReGamePlayerGiveDefaultItems(
+        ReGamePlayerGiveDefaultItemsMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif

@@ -189,5 +189,12 @@ namespace mhooks
         struct ReGamePlayerSpawnEquip;
         return CreateHook<ReGamePlayerSpawnEquip>(HookChains()->PlayerOnSpawnEquip(), callback, priority, enable);
     }
+
+    MHook* MHookReGamePlayerGiveDefaultItems(const ReGamePlayerGiveDefaultItemsMCallback callback,
+                                             const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerGiveDefaultItems;
+        return CreateHook<ReGamePlayerGiveDefaultItems>(HookChains()->PlayerGiveDefaultItems(), callback, priority, enable);
+    }
 }
 #endif
