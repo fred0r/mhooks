@@ -182,5 +182,12 @@ namespace mhooks
         struct ReGamePlayerResetMaxSpeed;
         return CreateHook<ReGamePlayerResetMaxSpeed>(HookChains()->PlayerResetMaxSpeed(), callback, priority, enable);
     }
+
+    MHook* MHookReGamePlayerSpawnEquip(const ReGamePlayerSpawnEquipMCallback callback,
+                                       const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerSpawnEquip;
+        return CreateHook<ReGamePlayerSpawnEquip>(HookChains()->PlayerOnSpawnEquip(), callback, priority, enable);
+    }
 }
 #endif

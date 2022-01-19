@@ -174,6 +174,10 @@ using ReGameRestartRoundMCallback = core::Delegate<void(const ReGameRestartRound
 using ReGameResetMaxSpeedMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerResetMaxSpeed, void(cssdk::PlayerBase*)>;
 using ReGameResetMaxSpeedMCallback = core::Delegate<void(const ReGameResetMaxSpeedMChain& chain, cssdk::PlayerBase* player)>;
 
+// CBasePlayer::OnSpawnEquip
+using ReGamePlayerSpawnEquipMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerOnSpawnEquip, void(cssdk::PlayerBase*, bool, bool)>;
+using ReGamePlayerSpawnEquipMCallback = core::Delegate<void(const ReGamePlayerSpawnEquipMChain& chain, cssdk::PlayerBase* player, bool add_default, bool equip_game)>;
+
 namespace mhooks
 {
     /**
@@ -416,6 +420,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReGameResetMaxSpeed(
         ReGameResetMaxSpeedMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReGamePlayerSpawnEquip(
+        ReGamePlayerSpawnEquipMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
