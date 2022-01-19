@@ -33,6 +33,13 @@ namespace mhooks
         return CreateHook<ReGameInstallGameRules>(HookChains()->InstallGameRules(), callback, priority, enable);
     }
 
+    MHook* MHookReGameWeaponDefaultDeploy(const ReGameWeaponDefaultDeployMCallback callback,
+                                          const HookChainPriority priority, const bool enable)
+    {
+        struct ReGameWeaponDefaultDeploy;
+        return CreateHook<ReGameWeaponDefaultDeploy>(HookChains()->PlayerBaseWeaponDefaultDeploy(), callback, priority, enable);
+    }
+
     MHook* MHookReGamePlayerSpawn(const ReGamePlayerSpawnMCallback callback,
                                   const HookChainPriority priority, const bool enable)
     {
