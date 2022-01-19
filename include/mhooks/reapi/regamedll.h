@@ -135,6 +135,10 @@ using ReGamePlayerSetClientUserInfoNameMCallback = core::Delegate<bool(const ReG
 using ReGamePlayerSetClientUserInfoModelMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerSetClientUserInfoModel, void(cssdk::PlayerBase*, char*, char*)>;
 using ReGamePlayerSetClientUserInfoModelMCallback = core::Delegate<void(const ReGamePlayerSetClientUserInfoModelMChain& chain, cssdk::PlayerBase* player, char* info, char* model)>;
 
+// CBasePlayer::ThrowGrenade
+using ReGamePlayerThrowGrenadeMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerThrowGrenade, cssdk::Grenade*(cssdk::PlayerBase*, cssdk::PlayerWeaponBase*, cssdk::Vector&, cssdk::Vector&, float, unsigned short)>;
+using ReGamePlayerThrowGrenadeMCallback = core::Delegate<cssdk::Grenade*(const ReGamePlayerThrowGrenadeMChain& chain, cssdk::PlayerBase* player, cssdk::PlayerWeaponBase* weapon, cssdk::Vector& origin, cssdk::Vector& velocity, float time, unsigned short event_id)>;
+
 namespace mhooks
 {
     /**
@@ -443,6 +447,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReGamePlayerSetClientUserInfoModel(
         ReGamePlayerSetClientUserInfoModelMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReGamePlayerThrowGrenade(
+        ReGamePlayerThrowGrenadeMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
