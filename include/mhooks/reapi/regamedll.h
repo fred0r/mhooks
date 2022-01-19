@@ -186,6 +186,10 @@ using ReGamePlayerGiveDefaultItemsMCallback = core::Delegate<void(const ReGamePl
 using ReGamePlayerSetClientUserInfoNameMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerSetClientUserInfoName, bool(cssdk::PlayerBase*, char*, char*)>;
 using ReGamePlayerSetClientUserInfoNameMCallback = core::Delegate<bool(const ReGamePlayerSetClientUserInfoNameMChain& chain, cssdk::PlayerBase* player, char* info, char* name)>;
 
+// CBasePlayer::SetClientUserInfoModel
+using ReGamePlayerSetClientUserInfoModelMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerSetClientUserInfoModel, void(cssdk::PlayerBase*, char*, char*)>;
+using ReGamePlayerSetClientUserInfoModelMCallback = core::Delegate<void(const ReGamePlayerSetClientUserInfoModelMChain& chain, cssdk::PlayerBase* player, char* info, char* model)>;
+
 namespace mhooks
 {
     /**
@@ -461,6 +465,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReGamePlayerSetClientUserInfoName(
         ReGamePlayerSetClientUserInfoNameMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReGamePlayerSetClientUserInfoModel(
+        ReGamePlayerSetClientUserInfoModelMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif

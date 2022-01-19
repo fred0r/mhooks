@@ -203,5 +203,12 @@ namespace mhooks
         struct ReGamePlayerSetClientUserInfoName;
         return CreateHook<ReGamePlayerSetClientUserInfoName>(HookChains()->PlayerSetClientUserInfoName(), callback, priority, enable);
     }
+
+    MHook* MHookReGamePlayerSetClientUserInfoModel(const ReGamePlayerSetClientUserInfoModelMCallback callback,
+                                                   const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerSetClientUserInfoModel;
+        return CreateHook<ReGamePlayerSetClientUserInfoModel>(HookChains()->PlayerSetClientUserInfoModel(), callback, priority, enable);
+    }
 }
 #endif
