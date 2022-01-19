@@ -182,6 +182,10 @@ using ReGamePlayerSpawnEquipMCallback = core::Delegate<void(const ReGamePlayerSp
 using ReGamePlayerGiveDefaultItemsMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerGiveDefaultItems, void(cssdk::PlayerBase*)>;
 using ReGamePlayerGiveDefaultItemsMCallback = core::Delegate<void(const ReGamePlayerGiveDefaultItemsMChain& chain, cssdk::PlayerBase* player)>;
 
+// CBasePlayer::SetClientUserInfoName
+using ReGamePlayerSetClientUserInfoNameMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerSetClientUserInfoName, bool(cssdk::PlayerBase*, char*, char*)>;
+using ReGamePlayerSetClientUserInfoNameMCallback = core::Delegate<bool(const ReGamePlayerSetClientUserInfoNameMChain& chain, cssdk::PlayerBase* player, char* info, char* name)>;
+
 namespace mhooks
 {
     /**
@@ -446,6 +450,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReGamePlayerGiveDefaultItems(
         ReGamePlayerGiveDefaultItemsMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReGamePlayerSetClientUserInfoName(
+        ReGamePlayerSetClientUserInfoNameMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
