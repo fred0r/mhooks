@@ -26,85 +26,6 @@ using namespace mhooks::detail;
 
 namespace mhooks
 {
-    MHook* MHookReGameInstallGameRules(const ReGameInstallGameRulesMCallback callback,
-                                       const HookChainPriority priority, const bool enable)
-    {
-        struct ReGameInstallGameRules;
-        return CreateHook<ReGameInstallGameRules>(HookChains()->InstallGameRules(), callback, priority, enable);
-    }
-
-    MHook* MHookReGameWeaponDefaultDeploy(const ReGameWeaponDefaultDeployMCallback callback,
-                                          const HookChainPriority priority, const bool enable)
-    {
-        struct ReGameWeaponDefaultDeploy;
-        return CreateHook<ReGameWeaponDefaultDeploy>(HookChains()->PlayerBaseWeaponDefaultDeploy(), callback, priority, enable);
-    }
-
-    MHook* MHookReGamePlayerSpawn(const ReGamePlayerSpawnMCallback callback,
-                                  const HookChainPriority priority, const bool enable)
-    {
-        struct ReGamePlayerSpawn;
-        return CreateHook<ReGamePlayerSpawn>(HookChains()->PlayerSpawn(), callback, priority, enable);
-    }
-
-    MHook* MHookReGamePlayerPreThink(const ReGamePlayerPreThinkMCallback callback,
-                                     const HookChainPriority priority, const bool enable)
-    {
-        struct ReGamePlayerPreThink;
-        return CreateHook<ReGamePlayerPreThink>(HookChains()->PlayerPreThink(), callback, priority, enable);
-    }
-
-    MHook* MHookReGamePlayerPostThink(const ReGamePlayerPostThinkMCallback callback,
-                                      const HookChainPriority priority, const bool enable)
-    {
-        struct ReGamePlayerPostThink;
-        return CreateHook<ReGamePlayerPostThink>(HookChains()->PlayerPostThink(), callback, priority, enable);
-    }
-
-    MHook* MHookReGameUpdateClientData(const ReGameUpdateClientDataMCallback callback,
-                                       const HookChainPriority priority, const bool enable)
-    {
-        struct ReGamePlayerUpdateClientData;
-        return CreateHook<ReGamePlayerUpdateClientData>(HookChains()->PlayerUpdateClientData(),
-                                                        callback, priority, enable);
-    }
-
-    MHook* MHookReGamePlayerTakeDamage(const ReGamePlayerTakeDamageMCallback callback,
-                                       const HookChainPriority priority, const bool enable)
-    {
-        struct ReGamePlayerTakeDamage;
-        return CreateHook<ReGamePlayerTakeDamage>(HookChains()->PlayerTakeDamage(), callback, priority, enable);
-    }
-
-    MHook* MHookReGamePlayerKilled(const ReGamePlayerKilledMCallback callback,
-                                   const HookChainPriority priority, const bool enable)
-    {
-        struct ReGamePlayerKilled;
-        return CreateHook<ReGamePlayerKilled>(HookChains()->PlayerKilled(), callback, priority, enable);
-    }
-
-    MHook* MHookReGameObserverIsValidTarget(const ReGameObserverIsValidTargetMCallback callback,
-                                            const HookChainPriority priority, const bool enable)
-    {
-        struct ReGamePlayerObserverIsValidTarget;
-        return CreateHook<ReGamePlayerObserverIsValidTarget>(HookChains()->PlayerObserverIsValidTarget(),
-                                                             callback, priority, enable);
-    }
-
-    MHook* MHookReGameStartObserver(const ReGameStartObserverMCallback callback,
-                                    const HookChainPriority priority, const bool enable)
-    {
-        struct ReGamePlayerStartObserver;
-        return CreateHook<ReGamePlayerStartObserver>(HookChains()->PlayerStartObserver(), callback, priority, enable);
-    }
-
-    MHook* MHookReGameGetIntoGame(const ReGameGetIntoGameMCallback callback,
-                                  const HookChainPriority priority, const bool enable)
-    {
-        struct ReGamePlayerGetIntoGame;
-        return CreateHook<ReGamePlayerGetIntoGame>(HookChains()->PlayerGetIntoGame(), callback, priority, enable);
-    }
-
     MHook* MHookReGameShowMenu(const ReGameShowMenuMCallback callback,
                                const HookChainPriority priority, const bool enable)
     {
@@ -148,18 +69,11 @@ namespace mhooks
         return CreateHook<ReGamePlayerBlind>(HookChains()->PlayerBlind(), callback, priority, enable);
     }
 
-    MHook* MHookReGamePlayerMakeBomber(const ReGamePlayerMakeBomberMCallback callback,
-                                       const HookChainPriority priority, const bool enable)
+    MHook* MHookReGameRulesInstallGameRules(const ReGameRulesInstallGameRulesMCallback callback,
+                                            const HookChainPriority priority, const bool enable)
     {
-        struct ReGamePlayerMakeBomber;
-        return CreateHook<ReGamePlayerMakeBomber>(HookChains()->PlayerMakeBomber(), callback, priority, enable);
-    }
-
-    MHook* MHookReGameCanPlayerHearPlayer(const ReGameCanPlayerHearPlayerMCallback callback,
-                                          const HookChainPriority priority, const bool enable)
-    {
-        struct ReGameCanPlayerHearPlayer;
-        return CreateHook<ReGameCanPlayerHearPlayer>(HookChains()->GameRulesCanPlayerHearPlayer(), callback, priority, enable);
+        struct ReGameRulesInstallGameRules;
+        return CreateHook<ReGameRulesInstallGameRules>(HookChains()->InstallGameRules(), callback, priority, enable);
     }
 
     MHook* MHookReGameRulesRoundFreezeEnd(const ReGameRulesRoundFreezeEndMCallback callback,
@@ -176,15 +90,108 @@ namespace mhooks
         return CreateHook<ReGameRulesRoundEnd>(HookChains()->RoundEnd(), callback, priority, enable);
     }
 
-    MHook* MHookReGameRestartRound(const ReGameRestartRoundMCallback callback,
-                                   const HookChainPriority priority, const bool enable)
+    MHook* MHookReGameMultiplayRestartRound(const ReGameMultiplayRestartRoundMCallback callback,
+                                            const HookChainPriority priority, const bool enable)
     {
-        struct ReGameRulesRestartRound;
-        return CreateHook<ReGameRulesRestartRound>(HookChains()->GameRulesRestartRound(), callback, priority, enable);
+        struct ReGameMultiplayRestartRound;
+        return CreateHook<ReGameMultiplayRestartRound>(HookChains()->GameRulesRestartRound(), callback, priority, enable);
     }
 
-    MHook* MHookReGameResetMaxSpeed(const ReGameResetMaxSpeedMCallback callback,
-                                    const HookChainPriority priority, const bool enable)
+    MHook* MHookReGameMultiplayBalanceTeams(const ReGameMultiplayBalanceTeamsMCallback callback,
+                                            const HookChainPriority priority, const bool enable)
+    {
+        struct ReGameMultiplayBalanceTeams;
+        return CreateHook<ReGameMultiplayBalanceTeams>(HookChains()->GameRulesBalanceTeams(), callback, priority, enable);
+    }
+
+    MHook* MHookReGameMgrHelpCanPlayerHearPlayer(const ReGameMgrHelpCanPlayerHearPlayerMCallback callback,
+                                                 const HookChainPriority priority, const bool enable)
+    {
+        struct ReGameMgrHelpCanPlayerHearPlayer;
+        return CreateHook<ReGameMgrHelpCanPlayerHearPlayer>(HookChains()->GameRulesCanPlayerHearPlayer(), callback, priority, enable);
+    }
+
+    MHook* MHookReGameWeaponDefaultDeploy(const ReGameWeaponDefaultDeployMCallback callback,
+                                          const HookChainPriority priority, const bool enable)
+    {
+        struct ReGameWeaponDefaultDeploy;
+        return CreateHook<ReGameWeaponDefaultDeploy>(HookChains()->PlayerBaseWeaponDefaultDeploy(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerSpawn(const ReGamePlayerSpawnMCallback callback,
+                                  const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerSpawn;
+        return CreateHook<ReGamePlayerSpawn>(HookChains()->PlayerSpawn(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerPreThink(const ReGamePlayerPreThinkMCallback callback,
+                                     const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerPreThink;
+        return CreateHook<ReGamePlayerPreThink>(HookChains()->PlayerPreThink(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerPostThink(const ReGamePlayerPostThinkMCallback callback,
+                                      const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerPostThink;
+        return CreateHook<ReGamePlayerPostThink>(HookChains()->PlayerPostThink(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerUpdateClientData(const ReGamePlayerUpdateClientDataMCallback callback,
+                                             const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerUpdateClientData;
+        return CreateHook<ReGamePlayerUpdateClientData>(HookChains()->PlayerUpdateClientData(),
+                                                        callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerTakeDamage(const ReGamePlayerTakeDamageMCallback callback,
+                                       const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerTakeDamage;
+        return CreateHook<ReGamePlayerTakeDamage>(HookChains()->PlayerTakeDamage(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerKilled(const ReGamePlayerKilledMCallback callback,
+                                   const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerKilled;
+        return CreateHook<ReGamePlayerKilled>(HookChains()->PlayerKilled(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerObserverIsValidTarget(const ReGamePlayerObserverIsValidTargetMCallback callback,
+                                                  const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerObserverIsValidTarget;
+        return CreateHook<ReGamePlayerObserverIsValidTarget>(HookChains()->PlayerObserverIsValidTarget(),
+                                                             callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerStartObserver(const ReGamePlayerStartObserverMCallback callback,
+                                          const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerStartObserver;
+        return CreateHook<ReGamePlayerStartObserver>(HookChains()->PlayerStartObserver(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerGetIntoGame(const ReGamePlayerGetIntoGameMCallback callback,
+                                        const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerGetIntoGame;
+        return CreateHook<ReGamePlayerGetIntoGame>(HookChains()->PlayerGetIntoGame(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerMakeBomber(const ReGamePlayerMakeBomberMCallback callback,
+                                       const HookChainPriority priority, const bool enable)
+    {
+        struct ReGamePlayerMakeBomber;
+        return CreateHook<ReGamePlayerMakeBomber>(HookChains()->PlayerMakeBomber(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerResetMaxSpeed(const ReGamePlayerResetMaxSpeedMCallback callback,
+                                          const HookChainPriority priority, const bool enable)
     {
         struct ReGamePlayerResetMaxSpeed;
         return CreateHook<ReGamePlayerResetMaxSpeed>(HookChains()->PlayerResetMaxSpeed(), callback, priority, enable);

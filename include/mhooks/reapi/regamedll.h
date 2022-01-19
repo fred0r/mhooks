@@ -63,6 +63,10 @@ using ReGameRulesRoundEndMCallback = core::Delegate<bool(const ReGameRulesRoundE
 using ReGameMultiplayRestartRoundMChain = mhooks::ReApiMHookChain<cssdk::ReHookGameRulesRestartRound, void()>;
 using ReGameMultiplayRestartRoundMCallback = core::Delegate<void(const ReGameMultiplayRestartRoundMChain& chain)>;
 
+// CHalfLifeMultiplay::BalanceTeams
+using ReGameMultiplayBalanceTeamsMChain = mhooks::ReApiMHookChain<cssdk::ReHookGameRulesBalanceTeams, void()>;
+using ReGameMultiplayBalanceTeamsMCallback = core::Delegate<void(const ReGameMultiplayBalanceTeamsMChain& chain)>;
+
 // CCStrikeGameMgrHelper::CanPlayerHearPlayer
 using ReGameMgrHelpCanPlayerHearPlayerMChain = mhooks::ReApiMHookChain<cssdk::ReHookGameRulesCanPlayerHearPlayer, bool(cssdk::PlayerBase*, cssdk::PlayerBase*)>;
 using ReGameMgrHelpCanPlayerHearPlayerMCallback = core::Delegate<bool(const ReGameMgrHelpCanPlayerHearPlayerMChain& chain, cssdk::PlayerBase* listener, cssdk::PlayerBase* talker)>;
@@ -241,6 +245,17 @@ namespace mhooks
     */
     ATTR_MINSIZE MHook* MHookReGameMultiplayRestartRound(
         ReGameMultiplayRestartRoundMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+    */
+    ATTR_MINSIZE MHook* MHookReGameMultiplayBalanceTeams(
+        ReGameMultiplayBalanceTeamsMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 
     /**
