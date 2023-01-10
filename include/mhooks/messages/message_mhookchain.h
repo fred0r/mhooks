@@ -28,6 +28,7 @@ namespace mhooks
     class MessageMHookChain final : public MHookChain<MessageMHookChain, bool, cssdk::MessageType&,
                                                       int, float*&, cssdk::Edict*&, MessageArgs&>
     {
+        template <typename, typename, typename...>
         friend class MHookChain;
 
         HooksContainerType enabled_hooks_{};
