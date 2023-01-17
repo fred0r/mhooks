@@ -269,5 +269,13 @@ namespace mhooks
         struct ReGamePlayerThrowGrenade;
         return CreateHook<ReGamePlayerThrowGrenade>(HookChains()->PlayerThrowGrenade(), callback, priority, enable);
     }
+
+    MHook* MHookReGameWeaponBoxSetModel(const ReGameWeaponBoxSetModelMCallback callback,
+                                        const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGameWeaponBoxSetModel;
+        return CreateHook<ReGameWeaponBoxSetModel>(HookChains()->WeaponBoxSetModel(), callback, priority, enable);
+    }
 }
 #endif
