@@ -92,6 +92,14 @@ namespace mhooks
         return CreateHook<ReGameRulesInstallGameRules>(HookChains()->InstallGameRules(), callback, priority, enable);
     }
 
+    MHook* MHookReGameRulesFreeGameRules(const ReGameRulesFreeGameRulesMCallback callback,
+                                         const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGameRulesFreeGameRules;
+        return CreateHook<ReGameRulesFreeGameRules>(HookChains()->FreeGameRules(), callback, priority, enable);
+    }
+
     MHook* MHookReGameRulesRoundFreezeEnd(const ReGameRulesRoundFreezeEndMCallback callback,
                                           const HookChainPriority priority, const bool enable)
     {

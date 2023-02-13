@@ -55,6 +55,10 @@ using ReGameRadiusFlashTraceLineMCallback = core::Delegate<void(const ReGameRadi
 using ReGameRulesInstallGameRulesMChain = mhooks::ReApiMHookChain<cssdk::ReHookInstallGameRules, cssdk::GameRules*()>;
 using ReGameRulesInstallGameRulesMCallback = core::Delegate<cssdk::GameRules*(const ReGameRulesInstallGameRulesMChain& chain)>;
 
+// CGameRules::FreeGameRules
+using ReGameRulesFreeGameRulesMChain = mhooks::ReApiMHookChain<cssdk::ReHookFreeGameRules, void(cssdk::GameRules**)>;
+using ReGameRulesFreeGameRulesMCallback = core::Delegate<void(const ReGameRulesFreeGameRulesMChain& chain, cssdk::GameRules**)>;
+
 // CGameRules::OnRoundFreezeEnd
 using ReGameRulesRoundFreezeEndMChain = mhooks::ReApiMHookChain<cssdk::ReHookGameRulesOnRoundFreezeEnd, void()>;
 using ReGameRulesRoundFreezeEndMCallback = core::Delegate<void(const ReGameRulesRoundFreezeEndMChain& chain)>;
@@ -155,7 +159,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameShowMenu(
         ReGameShowMenuMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -166,7 +170,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameShowVguiMenu(
         ReGameShowVguiMenuMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -177,7 +181,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameHandleMenuChooseTeam(
         ReGameHandleMenuChooseTeamMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -188,7 +192,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameHandleMenuChooseAppearance(
         ReGameHandleMenuChooseAppearanceMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -199,7 +203,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameGetForceCamera(
         ReGameGetForceCameraMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -210,7 +214,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerBlind(
         ReGamePlayerBlindMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -221,7 +225,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameRadiusFlashTraceLine(
         ReGameRadiusFlashTraceLineMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -232,7 +236,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameRulesInstallGameRules(
         ReGameRulesInstallGameRulesMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -243,7 +247,18 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
+    ATTR_MINSIZE MHook* MHookReGameRulesFreeGameRules(
+        ReGameRulesFreeGameRulesMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+     */
     ATTR_MINSIZE MHook* MHookReGameRulesRoundFreezeEnd(
         ReGameRulesRoundFreezeEndMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -254,7 +269,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameRulesRoundEnd(
         ReGameRulesRoundEndMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -265,7 +280,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameMultiplayRestartRound(
         ReGameMultiplayRestartRoundMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -276,7 +291,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameMultiplayBalanceTeams(
         ReGameMultiplayBalanceTeamsMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -287,7 +302,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameMgrHelpCanPlayerHearPlayer(
         ReGameMgrHelpCanPlayerHearPlayerMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -298,7 +313,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameWeaponDefaultDeploy(
         ReGameWeaponDefaultDeployMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -309,7 +324,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerSpawn(
         ReGamePlayerSpawnMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -320,7 +335,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerPreThink(
         ReGamePlayerPreThinkMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -331,7 +346,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerPostThink(
         ReGamePlayerPostThinkMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -342,7 +357,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerUpdateClientData(
         ReGamePlayerUpdateClientDataMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -353,7 +368,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerTakeDamage(
         ReGamePlayerTakeDamageMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -364,7 +379,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerKilled(
         ReGamePlayerKilledMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -375,7 +390,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerObserverIsValidTarget(
         ReGamePlayerObserverIsValidTargetMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -386,7 +401,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerStartObserver(
         ReGamePlayerStartObserverMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -397,7 +412,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerGetIntoGame(
         ReGamePlayerGetIntoGameMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -408,7 +423,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerMakeBomber(
         ReGamePlayerMakeBomberMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -419,7 +434,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerResetMaxSpeed(
         ReGamePlayerResetMaxSpeedMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -430,7 +445,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerSpawnEquip(
         ReGamePlayerSpawnEquipMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -441,7 +456,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerGiveDefaultItems(
         ReGamePlayerGiveDefaultItemsMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -452,7 +467,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerSetClientUserInfoName(
         ReGamePlayerSetClientUserInfoNameMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -463,7 +478,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerSetClientUserInfoModel(
         ReGamePlayerSetClientUserInfoModelMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -474,7 +489,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGamePlayerThrowGrenade(
         ReGamePlayerThrowGrenadeMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -485,7 +500,7 @@ namespace mhooks
      * @param callback Hook callback function.
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookReGameWeaponBoxSetModel(
         ReGameWeaponBoxSetModelMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
