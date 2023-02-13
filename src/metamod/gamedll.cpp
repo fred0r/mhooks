@@ -144,5 +144,13 @@ namespace mhooks
         struct GameDllUpdateClientData;
         return CreateHook<GameDllUpdateClientData>(HookUpdateClientData, callback, priority, post, enable);
     }
+
+    MHook* MHookGameDllGetWeaponData(const GameDllGetWeaponDataMCallback callback, const bool post,
+                                     const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct GameDllGetWeaponData;
+        return CreateHook<GameDllGetWeaponData>(HookGetWeaponData, callback, priority, post, enable);
+    }
 }
 #endif
