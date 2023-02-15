@@ -107,6 +107,10 @@ using ReGamePlayerTakeDamageMCallback = core::Delegate<cssdk::qboolean(const ReG
 using ReGamePlayerKilledMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerKilled, void(cssdk::PlayerBase*, cssdk::EntityVars*, int)>;
 using ReGamePlayerKilledMCallback = core::Delegate<void(const ReGamePlayerKilledMChain& chain, cssdk::PlayerBase* victim, cssdk::EntityVars* attacker, int gib)>;
 
+// CBasePlayer::AddPlayerItem
+using ReGamePlayerAddPlayerItemMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerAddPlayerItem, cssdk::qboolean(cssdk::PlayerBase*, cssdk::PlayerItemBase*)>;
+using ReGamePlayerAddPlayerItemMCallback = core::Delegate<cssdk::qboolean(const ReGamePlayerAddPlayerItemMChain& chain, cssdk::PlayerBase* player, cssdk::PlayerItemBase* item)>;
+
 // CBasePlayer::Observer_IsValidTarget
 using ReGamePlayerObserverIsValidTargetMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerObserverIsValidTarget, cssdk::PlayerBase*(cssdk::PlayerBase*, int, bool)>;
 using ReGamePlayerObserverIsValidTargetMCallback = core::Delegate<cssdk::PlayerBase*(const ReGamePlayerObserverIsValidTargetMChain& chain, cssdk::PlayerBase* observer, int player_index, bool same_team)>;
@@ -382,6 +386,17 @@ namespace mhooks
      */
     ATTR_MINSIZE MHook* MHookReGamePlayerKilled(
         ReGamePlayerKilledMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+     */
+    ATTR_MINSIZE MHook* MHookReGamePlayerAddPlayerItem(
+        ReGamePlayerAddPlayerItemMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 
     /**
