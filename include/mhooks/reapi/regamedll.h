@@ -155,6 +155,18 @@ using ReGamePlayerSetClientUserInfoModelMCallback = core::Delegate<void(const Re
 using ReGamePlayerThrowGrenadeMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerThrowGrenade, cssdk::Grenade*(cssdk::PlayerBase*, cssdk::PlayerWeaponBase*, cssdk::Vector&, cssdk::Vector&, float, unsigned short)>;
 using ReGamePlayerThrowGrenadeMCallback = core::Delegate<cssdk::Grenade*(const ReGamePlayerThrowGrenadeMChain& chain, cssdk::PlayerBase* player, cssdk::PlayerWeaponBase* weapon, cssdk::Vector& origin, cssdk::Vector& velocity, float time, unsigned short event_id)>;
 
+// CBasePlayer::Pain
+using ReGamePlayerPainMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerPain, void(cssdk::PlayerBase*, cssdk::HitBoxGroup, bool)>;
+using ReGamePlayerPainMCallback = core::Delegate<void(const ReGamePlayerPainMChain& chain, cssdk::PlayerBase* player, cssdk::HitBoxGroup lastHitGroup, bool hasArmour)>;
+
+// CBasePlayer::DeathSound
+using ReGamePlayerDeathSoundMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerDeathSound, void(cssdk::PlayerBase*)>;
+using ReGamePlayerDeathSoundMCallback = core::Delegate<void(const ReGamePlayerDeathSoundMChain& chain, cssdk::PlayerBase* player)>;
+
+// CBasePlayer::JoiningThink
+using ReGamePlayerJoiningThinkMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerJoiningThink, void(cssdk::PlayerBase*)>;
+using ReGamePlayerJoiningThinkMCallback = core::Delegate<void(const ReGamePlayerJoiningThinkMChain& chain, cssdk::PlayerBase* player)>;
+
 // CWeaponBox::SetModel
 using ReGameWeaponBoxSetModelMChain = mhooks::ReApiMHookChain<cssdk::ReHookWeaponBoxSetModel, void(cssdk::WeaponBox*, const char*)>;
 using ReGameWeaponBoxSetModelMCallback = core::Delegate<void(const ReGameWeaponBoxSetModelMChain& chain, cssdk::WeaponBox* weaponBox, const char* modelName)>;
@@ -522,6 +534,39 @@ namespace mhooks
      */
     ATTR_MINSIZE MHook* MHookReGamePlayerThrowGrenade(
         ReGamePlayerThrowGrenadeMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+     */
+    ATTR_MINSIZE MHook* MHookReGamePlayerPain(
+        ReGamePlayerPainMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+     */
+    ATTR_MINSIZE MHook* MHookReGamePlayerDeathSound(
+        ReGamePlayerDeathSoundMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+     */
+    ATTR_MINSIZE MHook* MHookReGamePlayerJoiningThink(
+        ReGamePlayerJoiningThinkMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 
     /**

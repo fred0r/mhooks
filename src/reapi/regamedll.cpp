@@ -294,6 +294,30 @@ namespace mhooks
         return CreateHook<ReGamePlayerThrowGrenade>(HookChains()->PlayerThrowGrenade(), callback, priority, enable);
     }
 
+    MHook* MHookReGamePlayerPain(const ReGamePlayerPainMCallback callback,
+                                 const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGamePlayerPain;
+        return CreateHook<ReGamePlayerPain>(HookChains()->PlayerPain(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerDeathSound(const ReGamePlayerDeathSoundMCallback callback,
+                                       const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGamePlayerDeathSound;
+        return CreateHook<ReGamePlayerDeathSound>(HookChains()->PlayerDeathSound(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerJoiningThink(const ReGamePlayerJoiningThinkMCallback callback,
+                                         const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGamePlayerJoiningThink;
+        return CreateHook<ReGamePlayerJoiningThink>(HookChains()->PlayerJoiningThink(), callback, priority, enable);
+    }
+
     MHook* MHookReGameWeaponBoxSetModel(const ReGameWeaponBoxSetModelMCallback callback,
                                         const HookChainPriority priority, const bool enable)
     {
