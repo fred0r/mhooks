@@ -84,6 +84,14 @@ namespace mhooks
         return CreateHook<ReGameRadiusFlashTraceLine>(HookChains()->RadiusFlashTraceLine(), callback, priority, enable);
     }
 
+    MHook* MHookReGameInternalCommand(const ReGameInternalCommandMCallback callback,
+                                      const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGameInternalCommand;
+        return CreateHook<ReGameInternalCommand>(HookChains()->InternalCommand(), callback, priority, enable);
+    }
+
     MHook* MHookReGameRulesInstallGameRules(const ReGameRulesInstallGameRulesMCallback callback,
                                             const HookChainPriority priority, const bool enable)
     {

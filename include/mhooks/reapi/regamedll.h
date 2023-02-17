@@ -51,6 +51,10 @@ using ReGamePlayerBlindMCallback = core::Delegate<void(const ReGamePlayerBlindMC
 using ReGameRadiusFlashTraceLineMChain = mhooks::ReApiMHookChain<cssdk::ReHookRadiusFlashTraceLine, void(cssdk::PlayerBase*, cssdk::EntityVars*, cssdk::EntityVars*, cssdk::Vector&, cssdk::Vector&, cssdk::TraceResult*)>;
 using ReGameRadiusFlashTraceLineMCallback = core::Delegate<void(const ReGameRadiusFlashTraceLineMChain& chain, cssdk::PlayerBase* player, cssdk::EntityVars* inflictor, cssdk::EntityVars* attacker, cssdk::Vector& origin, cssdk::Vector& spot, cssdk::TraceResult* trace_result)>;
 
+// InternalCommand
+using ReGameInternalCommandMChain = mhooks::ReApiMHookChain<cssdk::ReHookInternalCommand, void(cssdk::Edict*, const char*, const char*)>;
+using ReGameInternalCommandMCallback = core::Delegate<void(const ReGameInternalCommandMChain& chain, cssdk::Edict* client, const char* command, const char* arg1)>;
+
 // CGameRules::InstallGameRules
 using ReGameRulesInstallGameRulesMChain = mhooks::ReApiMHookChain<cssdk::ReHookInstallGameRules, cssdk::GameRules*()>;
 using ReGameRulesInstallGameRulesMCallback = core::Delegate<cssdk::GameRules*(const ReGameRulesInstallGameRulesMChain& chain)>;
@@ -248,6 +252,17 @@ namespace mhooks
      */
     ATTR_MINSIZE MHook* MHookReGameRadiusFlashTraceLine(
         ReGameRadiusFlashTraceLineMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+     */
+    ATTR_MINSIZE MHook* MHookReGameInternalCommand(
+        ReGameInternalCommandMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 
     /**
