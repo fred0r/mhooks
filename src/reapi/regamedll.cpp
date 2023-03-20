@@ -254,6 +254,14 @@ namespace mhooks
         return CreateHook<ReGamePlayerMakeBomber>(HookChains()->PlayerMakeBomber(), callback, priority, enable);
     }
 
+    MHook* MHookReGamePlayerJump(const ReGamePlayerJumpMCallback callback,
+                                 const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGamePlayerJump;
+        return CreateHook<ReGamePlayerJump>(HookChains()->PlayerJump(), callback, priority, enable);
+    }
+
     MHook* MHookReGamePlayerResetMaxSpeed(const ReGamePlayerResetMaxSpeedMCallback callback,
                                           const HookChainPriority priority, const bool enable)
     {

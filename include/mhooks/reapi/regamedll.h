@@ -135,6 +135,10 @@ using ReGamePlayerGetIntoGameMCallback = core::Delegate<bool(const ReGamePlayerG
 using ReGamePlayerMakeBomberMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerMakeBomber, bool(cssdk::PlayerBase*)>;
 using ReGamePlayerMakeBomberMCallback = core::Delegate<bool(const ReGamePlayerMakeBomberMChain& chain, cssdk::PlayerBase* player)>;
 
+// CBasePlayer::Jump
+using ReGamePlayerJumpMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerJump, void(cssdk::PlayerBase*)>;
+using ReGamePlayerJumpMCallback = core::Delegate<void(const ReGamePlayerJumpMChain& chain, cssdk::PlayerBase* player)>;
+
 // CBasePlayer::ResetMaxSpeed
 using ReGamePlayerResetMaxSpeedMChain = mhooks::ReApiMHookChain<cssdk::ReHookPlayerResetMaxSpeed, void(cssdk::PlayerBase*)>;
 using ReGamePlayerResetMaxSpeedMCallback = core::Delegate<void(const ReGamePlayerResetMaxSpeedMChain& chain, cssdk::PlayerBase* player)>;
@@ -483,6 +487,17 @@ namespace mhooks
      */
     ATTR_MINSIZE MHook* MHookReGamePlayerMakeBomber(
         ReGamePlayerMakeBomberMCallback callback,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * @brief N/D
+     *
+     * @param callback Hook callback function.
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+     */
+    ATTR_MINSIZE MHook* MHookReGamePlayerJump(
+        ReGamePlayerJumpMCallback callback,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 
     /**
