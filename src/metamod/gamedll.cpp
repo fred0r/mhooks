@@ -65,6 +65,14 @@ namespace mhooks
         return CreateHook<GameDllClientConnect>(HookClientConnect, callback, priority, post, enable);
     }
 
+    MHook* MHookGameDllClientKill(const GameDllClientKillMCallback callback, const bool post,
+                                     const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct GameDllClientKill;
+        return CreateHook<GameDllClientKill>(HookClientKill, callback, priority, post, enable);
+    }
+
     MHook* MHookGameDllClientUserInfoChanged(const GameDllClientUserInfoChangedMCallback callback, const bool post,
                                              const HookChainPriority priority, const bool enable)
     {

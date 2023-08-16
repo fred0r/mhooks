@@ -43,6 +43,10 @@ using GameDllServerDeactivateMCallback = core::Delegate<void(const GameDllServer
 using GameDllClientConnectMChain = mhooks::MetamodMHookChain<cssdk::qboolean(cssdk::Edict*, const char*, const char*, char*)>;
 using GameDllClientConnectMCallback = core::Delegate<cssdk::qboolean(const GameDllClientConnectMChain& chain, cssdk::Edict* client, const char* name, const char* address, char* reject_reason)>;
 
+// ClientKill
+using GameDllClientKillMChain = mhooks::MetamodMHookChain<void(cssdk::Edict*)>;
+using GameDllClientKillMCallback = core::Delegate<void(const GameDllClientKillMChain& chain, cssdk::Edict* client)>;
+
 // ClientUserInfoChanged
 using GameDllClientUserInfoChangedMChain = mhooks::MetamodMHookChain<void(cssdk::Edict*, char*)>;
 using GameDllClientUserInfoChangedMCallback = core::Delegate<void(const GameDllClientUserInfoChangedMChain& chain, cssdk::Edict* client, char* info_buffer)>;
@@ -147,6 +151,18 @@ namespace mhooks
      */
     ATTR_MINSIZE MHook* MHookGameDllClientConnect(
         GameDllClientConnectMCallback callback, bool post,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * TODO: @brief
+     *
+     * @param callback Hook callback function.
+     * @param post Is this a post hook?
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+     */
+    ATTR_MINSIZE MHook* MHookGameDllClientKill(
+        GameDllClientKillMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 
     /**
@@ -272,7 +288,7 @@ namespace mhooks
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 
     /**
-     * TODO: @brief Updates the given client's data.
+     * TODO: @brief
      *
      * @param callback Hook callback function.
      * @param post Is this a post hook?
