@@ -84,12 +84,28 @@ namespace mhooks
         return CreateHook<ReGameRadiusFlashTraceLine>(HookChains()->RadiusFlashTraceLine(), callback, priority, enable);
     }
 
+    MHook* MHookReGameInternalCommand(const ReGameInternalCommandMCallback callback,
+                                      const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGameInternalCommand;
+        return CreateHook<ReGameInternalCommand>(HookChains()->InternalCommand(), callback, priority, enable);
+    }
+
     MHook* MHookReGameRulesInstallGameRules(const ReGameRulesInstallGameRulesMCallback callback,
                                             const HookChainPriority priority, const bool enable)
     {
         assert(!!callback);
         struct ReGameRulesInstallGameRules;
         return CreateHook<ReGameRulesInstallGameRules>(HookChains()->InstallGameRules(), callback, priority, enable);
+    }
+
+    MHook* MHookReGameRulesFreeGameRules(const ReGameRulesFreeGameRulesMCallback callback,
+                                         const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGameRulesFreeGameRules;
+        return CreateHook<ReGameRulesFreeGameRules>(HookChains()->FreeGameRules(), callback, priority, enable);
     }
 
     MHook* MHookReGameRulesRoundFreezeEnd(const ReGameRulesRoundFreezeEndMCallback callback,
@@ -189,6 +205,22 @@ namespace mhooks
         return CreateHook<ReGamePlayerKilled>(HookChains()->PlayerKilled(), callback, priority, enable);
     }
 
+    MHook* MHookReGamePlayerAddPlayerItem(const ReGamePlayerAddPlayerItemMCallback callback,
+                                          const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGamePlayerAddPlayerItem;
+        return CreateHook<ReGamePlayerAddPlayerItem>(HookChains()->PlayerAddPlayerItem(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerRemovePlayerItem(const ReGamePlayerRemovePlayerItemMCallback callback,
+                                             const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGamePlayerRemovePlayerItem;
+        return CreateHook<ReGamePlayerRemovePlayerItem>(HookChains()->PlayerRemovePlayerItem(), callback, priority, enable);
+    }
+
     MHook* MHookReGamePlayerObserverIsValidTarget(const ReGamePlayerObserverIsValidTargetMCallback callback,
                                                   const HookChainPriority priority, const bool enable)
     {
@@ -220,6 +252,14 @@ namespace mhooks
         assert(!!callback);
         struct ReGamePlayerMakeBomber;
         return CreateHook<ReGamePlayerMakeBomber>(HookChains()->PlayerMakeBomber(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerJump(const ReGamePlayerJumpMCallback callback,
+                                 const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGamePlayerJump;
+        return CreateHook<ReGamePlayerJump>(HookChains()->PlayerJump(), callback, priority, enable);
     }
 
     MHook* MHookReGamePlayerResetMaxSpeed(const ReGamePlayerResetMaxSpeedMCallback callback,
@@ -268,6 +308,30 @@ namespace mhooks
         assert(!!callback);
         struct ReGamePlayerThrowGrenade;
         return CreateHook<ReGamePlayerThrowGrenade>(HookChains()->PlayerThrowGrenade(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerPain(const ReGamePlayerPainMCallback callback,
+                                 const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGamePlayerPain;
+        return CreateHook<ReGamePlayerPain>(HookChains()->PlayerPain(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerDeathSound(const ReGamePlayerDeathSoundMCallback callback,
+                                       const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGamePlayerDeathSound;
+        return CreateHook<ReGamePlayerDeathSound>(HookChains()->PlayerDeathSound(), callback, priority, enable);
+    }
+
+    MHook* MHookReGamePlayerJoiningThink(const ReGamePlayerJoiningThinkMCallback callback,
+                                         const HookChainPriority priority, const bool enable)
+    {
+        assert(!!callback);
+        struct ReGamePlayerJoiningThink;
+        return CreateHook<ReGamePlayerJoiningThink>(HookChains()->PlayerJoiningThink(), callback, priority, enable);
     }
 
     MHook* MHookReGameWeaponBoxSetModel(const ReGameWeaponBoxSetModelMCallback callback,

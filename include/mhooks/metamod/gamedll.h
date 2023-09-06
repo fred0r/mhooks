@@ -43,6 +43,10 @@ using GameDllServerDeactivateMCallback = core::Delegate<void(const GameDllServer
 using GameDllClientConnectMChain = mhooks::MetamodMHookChain<cssdk::qboolean(cssdk::Edict*, const char*, const char*, char*)>;
 using GameDllClientConnectMCallback = core::Delegate<cssdk::qboolean(const GameDllClientConnectMChain& chain, cssdk::Edict* client, const char* name, const char* address, char* reject_reason)>;
 
+// ClientKill
+using GameDllClientKillMChain = mhooks::MetamodMHookChain<void(cssdk::Edict*)>;
+using GameDllClientKillMCallback = core::Delegate<void(const GameDllClientKillMChain& chain, cssdk::Edict* client)>;
+
 // ClientUserInfoChanged
 using GameDllClientUserInfoChangedMChain = mhooks::MetamodMHookChain<void(cssdk::Edict*, char*)>;
 using GameDllClientUserInfoChangedMCallback = core::Delegate<void(const GameDllClientUserInfoChangedMChain& chain, cssdk::Edict* client, char* info_buffer)>;
@@ -83,6 +87,10 @@ using GameDllClientPutInServerMCallback = core::Delegate<void(const GameDllClien
 using GameDllUpdateClientDataMChain = mhooks::MetamodMHookChain<void(const cssdk::Edict*, cssdk::qboolean, cssdk::ClientData*)>;
 using GameDllUpdateClientDataMCallback = core::Delegate<void(const GameDllUpdateClientDataMChain& chain, const cssdk::Edict* client, cssdk::qboolean send_weapons, cssdk::ClientData* data)>;
 
+// GetWeaponData
+using GameDllGetWeaponDataMChain = mhooks::MetamodMHookChain<cssdk::qboolean(cssdk::Edict*, cssdk::WeaponData*)>;
+using GameDllGetWeaponDataMCallback = core::Delegate<cssdk::qboolean(const GameDllGetWeaponDataMChain& chain, cssdk::Edict* client, cssdk::WeaponData* data)>;
+
 namespace mhooks
 {
     /**
@@ -92,7 +100,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllInit(
         GameDllInitMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -104,7 +112,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllDispatchSpawn(
         GameDllDispatchSpawnMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -116,7 +124,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllServerActivate(
         GameDllServerActivateMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -128,7 +136,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllServerDeactivate(
         GameDllServerDeactivateMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -140,9 +148,21 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllClientConnect(
         GameDllClientConnectMCallback callback, bool post,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * TODO: @brief
+     *
+     * @param callback Hook callback function.
+     * @param post Is this a post hook?
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+     */
+    ATTR_MINSIZE MHook* MHookGameDllClientKill(
+        GameDllClientKillMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 
     /**
@@ -152,7 +172,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllClientUserInfoChanged(
         GameDllClientUserInfoChangedMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -164,7 +184,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllClientCommand(
         GameDllClientCommandMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -176,7 +196,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllStartFrame(
         GameDllStartFrameMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -188,7 +208,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllCmdStart(
         GameDllCmdStartMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -200,7 +220,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllCmdEnd(
         GameDllCmdEndMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -212,7 +232,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllPlayerPreThink(
         GameDllPlayerPreThinkMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -224,7 +244,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllPlayerPostThink(
         GameDllPlayerPostThinkMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -237,7 +257,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllAddToFullPack(
         GameDllAddToFullPackMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -250,7 +270,7 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllClientPutInServer(
         GameDllClientPutInServerMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
@@ -262,9 +282,21 @@ namespace mhooks
      * @param post Is this a post hook?
      * @param priority Hook priority.
      * @param enable Should a hook be enabled?
-    */
+     */
     ATTR_MINSIZE MHook* MHookGameDllUpdateClientData(
         GameDllUpdateClientDataMCallback callback, bool post,
+        cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
+
+    /**
+     * TODO: @brief
+     *
+     * @param callback Hook callback function.
+     * @param post Is this a post hook?
+     * @param priority Hook priority.
+     * @param enable Should a hook be enabled?
+     */
+    ATTR_MINSIZE MHook* MHookGameDllGetWeaponData(
+        GameDllGetWeaponDataMCallback callback, bool post,
         cssdk::HookChainPriority priority = cssdk::HookChainPriority::Normal, bool enable = true);
 }
 #endif
